@@ -1,0 +1,846 @@
+
+
+Microchip Technology PIC LITE Macro Assembler V1.36 build -262312587 
+                                                                                               Tue Dec  6 13:42:40 2022
+
+Microchip Technology Omniscient Code Generator v1.36 (Free mode) build 201601150325
+     1                           	processor	12F675
+     2                           	opt	pw 120
+     3                           	opt	lm
+     4                           	psect	cinit,global,class=CODE,merge=1,delta=2
+     5                           	psect	bssBANK0,global,class=BANK0,space=1,delta=1
+     6                           	psect	cstackCOMMON,global,class=COMMON,space=1,delta=1
+     7                           	psect	cstackBANK0,global,class=BANK0,space=1,delta=1
+     8                           	psect	maintext,global,class=CODE,split=1,delta=2
+     9                           	psect	text1,local,class=CODE,merge=1,delta=2
+    10                           	psect	text2,local,class=CODE,merge=1,delta=2
+    11                           	psect	text3,local,class=CODE,merge=1,delta=2
+    12                           	dabs	1,0x5E,2
+    13  0000                     	;# 
+    14  0001                     	;# 
+    15  0002                     	;# 
+    16  0003                     	;# 
+    17  0004                     	;# 
+    18  0005                     	;# 
+    19  000A                     	;# 
+    20  000B                     	;# 
+    21  000C                     	;# 
+    22  000E                     	;# 
+    23  000E                     	;# 
+    24  000F                     	;# 
+    25  0010                     	;# 
+    26  0019                     	;# 
+    27  001E                     	;# 
+    28  001F                     	;# 
+    29  0081                     	;# 
+    30  0085                     	;# 
+    31  008C                     	;# 
+    32  008E                     	;# 
+    33  0090                     	;# 
+    34  0095                     	;# 
+    35  0096                     	;# 
+    36  0096                     	;# 
+    37  0099                     	;# 
+    38  009A                     	;# 
+    39  009A                     	;# 
+    40  009B                     	;# 
+    41  009C                     	;# 
+    42  009D                     	;# 
+    43  009E                     	;# 
+    44  009F                     	;# 
+    45  001F                     _ADCON0	set	31
+    46  0019                     _CMCON	set	25
+    47  0005                     _GPIO	set	5
+    48  0005                     _GPIObits	set	5
+    49  000B                     _INTCON	set	11
+    50  000B                     _INTCONbits	set	11
+    51  009F                     _ANSEL	set	159
+    52  0096                     _IOCbits	set	150
+    53  0081                     _OPTION_REGbits	set	129
+    54  0090                     _OSCCAL	set	144
+    55  0085                     _TRISIO	set	133
+    56  0085                     _TRISIObits	set	133
+    57  0095                     _WPUbits	set	149
+    58                           
+    59                           ; #config settings
+    60  0000                     
+    61                           	psect	cinit
+    62  03F9                     start_initialization:	
+    63  03F9                     __initialization:	
+    64                           
+    65                           ; Clear objects allocated to BANK0
+    66  03F9  01AC               	clrf	__pbssBANK0& (0+127)
+    67  03FA  01AD               	clrf	(__pbssBANK0+1)& (0+127)
+    68  03FB  01AE               	clrf	(__pbssBANK0+2)& (0+127)
+    69  03FC  01AF               	clrf	(__pbssBANK0+3)& (0+127)
+    70  03FD                     end_of_initialization:	
+    71                           ;End of C runtime variable initialization code
+    72                           
+    73  03FD                     __end_of__initialization:	
+    74  03FD  0183               	clrf	3
+    75  03FE  2B30               	ljmp	_main	;jump to C main() function
+    76                           
+    77                           	psect	bssBANK0
+    78  002C                     __pbssBANK0:	
+    79  002C                     _CHARBYTE:	
+    80  002C                     	ds	4
+    81                           
+    82                           	psect	cstackCOMMON
+    83  0000                     __pcstackCOMMON:	
+    84  0000                     ??_PIC_INIT:	
+    85  0000                     ??_INIT_AFTER_SLEEP:	
+    86                           ; 1 bytes @ 0x0
+    87                           
+    88                           
+    89                           	psect	cstackBANK0
+    90  0020                     __pcstackBANK0:	
+    91                           ; 1 bytes @ 0x0
+    92                           
+    93  0020                     ?_PIC_INIT:	
+    94  0020                     ?_INIT_AFTER_SLEEP:	
+    95                           ; 1 bytes @ 0x0
+    96                           
+    97  0020                     ??_TRANSMIT_DATA:	
+    98                           ; 1 bytes @ 0x0
+    99                           
+   100  0020                     ?_main:	
+   101                           ; 1 bytes @ 0x0
+   102                           
+   103  0020                     ?_TRANSMIT_DATA:	
+   104                           ; 1 bytes @ 0x0
+   105                           
+   106                           
+   107                           ; 2 bytes @ 0x0
+   108  0020                     	ds	2
+   109  0022                     TRANSMIT_DATA@CURRENT_DATA:	
+   110                           
+   111                           ; 4 bytes @ 0x2
+   112  0022                     	ds	4
+   113  0026                     TRANSMIT_DATA@x:	
+   114                           
+   115                           ; 2 bytes @ 0x6
+   116  0026                     	ds	2
+   117  0028                     ??_main:	
+   118                           
+   119                           ; 1 bytes @ 0x8
+   120  0028                     	ds	2
+   121  002A                     main@but_count:	
+   122                           
+   123                           ; 1 bytes @ 0xA
+   124  002A                     	ds	1
+   125  002B                     main@execute:	
+   126                           
+   127                           ; 1 bytes @ 0xB
+   128  002B                     	ds	1
+   129                           
+   130                           	psect	maintext
+   131  0330                     __pmaintext:	
+   132 ;;
+   133 ;;Main: autosize = 0, tempsize = 2, incstack = 0, save=0
+   134 ;;
+   135 ;; *************** function _main *****************
+   136 ;; Defined at:
+   137 ;;		line 134 in file "newmain.c"
+   138 ;; Parameters:    Size  Location     Type
+   139 ;;		None
+   140 ;; Auto vars:     Size  Location     Type
+   141 ;;  execute         1   11[BANK0 ] unsigned char 
+   142 ;;  but_count       1   10[BANK0 ] unsigned char 
+   143 ;; Return value:  Size  Location     Type
+   144 ;;                  1    wreg      void 
+   145 ;; Registers used:
+   146 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   147 ;; Tracked objects:
+   148 ;;		On entry : B00/0
+   149 ;;		On exit  : 0/0
+   150 ;;		Unchanged: 0/0
+   151 ;; Data sizes:     COMMON   BANK0
+   152 ;;      Params:         0       0
+   153 ;;      Locals:         0       2
+   154 ;;      Temps:          0       2
+   155 ;;      Totals:         0       4
+   156 ;;Total ram usage:        4 bytes
+   157 ;; Hardware stack levels required when called:    1
+   158 ;; This function calls:
+   159 ;;		_INIT_AFTER_SLEEP
+   160 ;;		_PIC_INIT
+   161 ;;		_TRANSMIT_DATA
+   162 ;; This function is called by:
+   163 ;;		Startup code after reset
+   164 ;; This function uses a non-reentrant model
+   165 ;;
+   166                           
+   167                           
+   168                           ;psect for function _main
+   169  0330                     _main:	
+   170                           
+   171                           ;newmain.c: 135: PIC_INIT();
+   172                           
+   173                           ;incstack = 0
+   174                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   175  0330  2318               	fcall	_PIC_INIT
+   176  0331                     l57:	
+   177                           ;newmain.c: 137: while(1){
+   178                           
+   179  0331  0063               	sleep	;# 
+   180                           
+   181                           ;newmain.c: 139: __nop();
+   182  0332  0000               	nop
+   183                           
+   184                           ;newmain.c: 141: if (INTCONbits.GPIF = 1){
+   185  0333  140B               	bsf	11,0	;volatile
+   186                           
+   187                           ;newmain.c: 144: unsigned char but_count = 0;
+   188  0334  1283               	bcf	3,5	;RP0=0, select bank0
+   189  0335  01AA               	clrf	main@but_count
+   190                           
+   191                           ;newmain.c: 145: for (unsigned char execute = 0; execute <= 20;){
+   192  0336  01AB               	clrf	main@execute
+   193  0337  3015               	movlw	21
+   194  0338  022B               	subwf	main@execute,w
+   195  0339  1803               	btfsc	3,0
+   196  033A  2B5E               	goto	l742
+   197  033B                     l59:	
+   198                           
+   199                           ;newmain.c: 148: if (GPIObits.GP4 == 0 || GPIObits.GP5 == 0)
+   200  033B  1E05               	btfss	5,4	;volatile
+   201  033C  2B3F               	goto	l728
+   202  033D  1A85               	btfsc	5,5	;volatile
+   203  033E  2B4B               	goto	l734
+   204  033F                     l728:	
+   205                           
+   206                           ;newmain.c: 149: {
+   207                           ;newmain.c: 150: if (++but_count >= 10)
+   208  033F  3001               	movlw	1
+   209  0340  00A8               	movwf	??_main
+   210  0341  0828               	movf	??_main,w
+   211  0342  07AA               	addwf	main@but_count,f
+   212  0343  300A               	movlw	10
+   213  0344  022A               	subwf	main@but_count,w
+   214  0345  1C03               	skipc
+   215  0346  2B50               	goto	l738
+   216                           
+   217                           ;newmain.c: 151: {
+   218                           ;newmain.c: 153: TRANSMIT_DATA();
+   219  0347  2360               	fcall	_TRANSMIT_DATA
+   220                           
+   221                           ;newmain.c: 154: but_count=0;
+   222  0348  1283               	bcf	3,5	;RP0=0, select bank0
+   223  0349  01AA               	clrf	main@but_count
+   224                           
+   225                           ;newmain.c: 155: }
+   226                           ;newmain.c: 156: }
+   227  034A  2B50               	goto	l738
+   228  034B                     l734:	
+   229                           
+   230                           ;newmain.c: 157: else
+   231                           ;newmain.c: 158: {
+   232                           ;newmain.c: 159: but_count=0;
+   233  034B  01AA               	clrf	main@but_count
+   234                           
+   235                           ;newmain.c: 160: execute++;
+   236  034C  3001               	movlw	1
+   237  034D  00A8               	movwf	??_main
+   238  034E  0828               	movf	??_main,w
+   239  034F  07AB               	addwf	main@execute,f
+   240  0350                     l738:	
+   241                           
+   242                           ;newmain.c: 161: }
+   243                           ;newmain.c: 163: _delay((unsigned long)((20)*((4000000)/4000.0)));
+   244  0350  301A               	movlw	26
+   245  0351  00A9               	movwf	??_main+1
+   246  0352  30F8               	movlw	248
+   247  0353  00A8               	movwf	??_main
+   248  0354                     u257:	
+   249  0354  0BA8               	decfsz	??_main,f
+   250  0355  2B54               	goto	u257
+   251  0356  0BA9               	decfsz	??_main+1,f
+   252  0357  2B54               	goto	u257
+   253  0358  0000               	nop
+   254  0359  3015               	movlw	21
+   255  035A  1283               	bcf	3,5	;RP0=0, select bank0
+   256  035B  022B               	subwf	main@execute,w
+   257  035C  1C03               	skipc
+   258  035D  2B3B               	goto	l59
+   259  035E                     l742:	
+   260                           
+   261                           ;newmain.c: 165: }
+   262                           ;newmain.c: 166: INIT_AFTER_SLEEP();
+   263  035E  2312               	fcall	_INIT_AFTER_SLEEP
+   264  035F  2B31               	goto	l57
+   265  0360                     __end_of_main:	
+   266                           
+   267                           	psect	text1
+   268  0360                     __ptext1:	
+   269 ;; *************** function _TRANSMIT_DATA *****************
+   270 ;; Defined at:
+   271 ;;		line 87 in file "newmain.c"
+   272 ;; Parameters:    Size  Location     Type
+   273 ;;		None
+   274 ;; Auto vars:     Size  Location     Type
+   275 ;;  x               2    6[BANK0 ] int 
+   276 ;;  CURRENT_DATA    4    2[BANK0 ] unsigned long 
+   277 ;; Return value:  Size  Location     Type
+   278 ;;                  2   40[None  ] int 
+   279 ;; Registers used:
+   280 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1
+   281 ;; Tracked objects:
+   282 ;;		On entry : 0/0
+   283 ;;		On exit  : 0/0
+   284 ;;		Unchanged: 0/0
+   285 ;; Data sizes:     COMMON   BANK0
+   286 ;;      Params:         0       0
+   287 ;;      Locals:         0       6
+   288 ;;      Temps:          0       2
+   289 ;;      Totals:         0       8
+   290 ;;Total ram usage:        8 bytes
+   291 ;; Hardware stack levels used:    1
+   292 ;; This function calls:
+   293 ;;		Nothing
+   294 ;; This function is called by:
+   295 ;;		_main
+   296 ;; This function uses a non-reentrant model
+   297 ;;
+   298                           
+   299                           
+   300                           ;psect for function _TRANSMIT_DATA
+   301  0360                     _TRANSMIT_DATA:	
+   302                           
+   303                           ;newmain.c: 88: unsigned long int CURRENT_DATA = 0;
+   304                           
+   305                           ;incstack = 0
+   306                           ; Regs used in _TRANSMIT_DATA: [wreg-fsr0h+status,2+status,0+btemp+1]
+   307  0360  3000               	movlw	0
+   308  0361  1283               	bcf	3,5	;RP0=0, select bank0
+   309  0362  00A5               	movwf	TRANSMIT_DATA@CURRENT_DATA+3
+   310  0363  3000               	movlw	0
+   311  0364  00A4               	movwf	TRANSMIT_DATA@CURRENT_DATA+2
+   312  0365  3000               	movlw	0
+   313  0366  00A3               	movwf	TRANSMIT_DATA@CURRENT_DATA+1
+   314  0367  3000               	movlw	0
+   315  0368  00A2               	movwf	TRANSMIT_DATA@CURRENT_DATA
+   316                           
+   317                           ;newmain.c: 90: if (GPIObits.GP4 == 0) {
+   318  0369  1A05               	btfsc	5,4	;volatile
+   319  036A  2B73               	goto	l41
+   320                           
+   321                           ;newmain.c: 91: CURRENT_DATA = 0b1011000000001010011010000;
+   322  036B  3001               	movlw	1
+   323  036C  00A5               	movwf	TRANSMIT_DATA@CURRENT_DATA+3
+   324  036D  3060               	movlw	96
+   325  036E  00A4               	movwf	TRANSMIT_DATA@CURRENT_DATA+2
+   326  036F  3014               	movlw	20
+   327  0370  00A3               	movwf	TRANSMIT_DATA@CURRENT_DATA+1
+   328  0371  30D0               	movlw	208
+   329  0372  2B7C               	goto	L1
+   330  0373                     l41:	
+   331                           ;newmain.c: 92: }
+   332                           
+   333                           
+   334                           ;newmain.c: 93: else if (GPIObits.GP5 == 0) {
+   335  0373  1A85               	btfsc	5,5	;volatile
+   336  0374  0008               	return
+   337                           
+   338                           ;newmain.c: 94: CURRENT_DATA = 0b1011000000001010011000100;
+   339  0375  3001               	movlw	1
+   340  0376  00A5               	movwf	TRANSMIT_DATA@CURRENT_DATA+3
+   341  0377  3060               	movlw	96
+   342  0378  00A4               	movwf	TRANSMIT_DATA@CURRENT_DATA+2
+   343  0379  3014               	movlw	20
+   344  037A  00A3               	movwf	TRANSMIT_DATA@CURRENT_DATA+1
+   345  037B  30C4               	movlw	196
+   346  037C                     L1:	
+   347  037C  00A2               	movwf	TRANSMIT_DATA@CURRENT_DATA
+   348                           
+   349                           ;newmain.c: 98: }
+   350                           ;newmain.c: 102: GPIObits.GP2 = 0;
+   351                           
+   352                           ;newmain.c: 96: else{
+   353                           ;newmain.c: 97: return 0;
+   354                           ;	Return value of _TRANSMIT_DATA is never used
+   355                           
+   356                           ;newmain.c: 95: }
+   357  037D  1105               	bcf	5,2	;volatile
+   358                           
+   359                           ;newmain.c: 103: _delay((unsigned long)((1)*((4000000)/4000.0)));
+   360  037E  30F9               	movlw	249
+   361  037F  00A0               	movwf	??_TRANSMIT_DATA
+   362  0380                     u267:	
+   363  0380  0000               	nop
+   364  0381  0BA0               	decfsz	??_TRANSMIT_DATA,f
+   365  0382  2B80               	goto	u267
+   366  0383  2B84               	nop2	;nop
+   367  0384  0000               	nop
+   368                           
+   369                           ;newmain.c: 104: GPIObits.GP2 = 1;
+   370  0385  1283               	bcf	3,5	;RP0=0, select bank0
+   371  0386  1505               	bsf	5,2	;volatile
+   372                           
+   373                           ;newmain.c: 105: _delay((unsigned long)((300)*((4000000)/4000000.0)));
+   374  0387  3063               	movlw	99
+   375  0388  00A0               	movwf	??_TRANSMIT_DATA
+   376  0389                     u277:	
+   377  0389  0BA0               	decfsz	??_TRANSMIT_DATA,f
+   378  038A  2B89               	goto	u277
+   379  038B  2B8C               	nop2	;nop
+   380                           
+   381                           ;newmain.c: 106: GPIObits.GP2 = 0;
+   382  038C  1283               	bcf	3,5	;RP0=0, select bank0
+   383  038D  1105               	bcf	5,2	;volatile
+   384                           
+   385                           ;newmain.c: 107: _delay((unsigned long)((9300)*((4000000)/4000000.0)));
+   386  038E  300D               	movlw	13
+   387  038F  00A1               	movwf	??_TRANSMIT_DATA+1
+   388  0390  3012               	movlw	18
+   389  0391  00A0               	movwf	??_TRANSMIT_DATA
+   390  0392                     u287:	
+   391  0392  0BA0               	decfsz	??_TRANSMIT_DATA,f
+   392  0393  2B92               	goto	u287
+   393  0394  0BA1               	decfsz	??_TRANSMIT_DATA+1,f
+   394  0395  2B92               	goto	u287
+   395  0396  0000               	nop
+   396  0397                     l708:	
+   397                           ;newmain.c: 109: while(GPIObits.GP4 == 0 || GPIObits.GP5 == 0){
+   398                           
+   399  0397  1283               	bcf	3,5	;RP0=0, select bank0
+   400  0398  1A05               	btfsc	5,4	;volatile
+   401  0399  2BF6               	goto	l710
+   402  039A                     l680:	
+   403                           
+   404                           ;newmain.c: 110: CHARBYTE.CHAR = CURRENT_DATA;
+   405  039A  1283               	bcf	3,5	;RP0=0, select bank0
+   406  039B  0825               	movf	TRANSMIT_DATA@CURRENT_DATA+3,w
+   407  039C  00AF               	movwf	_CHARBYTE+3
+   408  039D  0824               	movf	TRANSMIT_DATA@CURRENT_DATA+2,w
+   409  039E  00AE               	movwf	_CHARBYTE+2
+   410  039F  0823               	movf	TRANSMIT_DATA@CURRENT_DATA+1,w
+   411  03A0  00AD               	movwf	_CHARBYTE+1
+   412  03A1  0822               	movf	TRANSMIT_DATA@CURRENT_DATA,w
+   413  03A2  00AC               	movwf	_CHARBYTE
+   414                           
+   415                           ;newmain.c: 111: for (int x = 0; x < 25; x++) {
+   416  03A3  01A6               	clrf	TRANSMIT_DATA@x
+   417  03A4  01A7               	clrf	TRANSMIT_DATA@x+1
+   418  03A5  2BD5               	goto	L2
+   419  03A6                     l51:	
+   420                           ;newmain.c: 113: case 0:
+   421                           
+   422                           ;newmain.c: 112: switch(CHARBYTE.CHARbits.bit25){
+   423                           
+   424                           
+   425                           ;newmain.c: 114: GPIObits.GP2 = 1;
+   426  03A6  1505               	bsf	5,2	;volatile
+   427                           
+   428                           ;newmain.c: 115: _delay((unsigned long)((300)*((4000000)/4000000.0)));
+   429  03A7  3063               	movlw	99
+   430  03A8  00A0               	movwf	??_TRANSMIT_DATA
+   431  03A9                     u297:	
+   432  03A9  0BA0               	decfsz	??_TRANSMIT_DATA,f
+   433  03AA  2BA9               	goto	u297
+   434  03AB  2BAC               	nop2	;nop
+   435                           
+   436                           ;newmain.c: 116: GPIObits.GP2 = 0;
+   437  03AC  1283               	bcf	3,5	;RP0=0, select bank0
+   438  03AD  1105               	bcf	5,2	;volatile
+   439                           
+   440                           ;newmain.c: 117: _delay((unsigned long)((900)*((4000000)/4000000.0)));
+   441  03AE  30E0               	movlw	224
+   442  03AF  00A0               	movwf	??_TRANSMIT_DATA
+   443  03B0                     u307:	
+   444  03B0  0000               	nop
+   445  03B1  0BA0               	decfsz	??_TRANSMIT_DATA,f
+   446  03B2  2BB0               	goto	u307
+   447  03B3  2BB4               	nop2	;nop
+   448  03B4  0000               	nop
+   449                           
+   450                           ;newmain.c: 118: break;
+   451  03B5  2BC5               	goto	l700
+   452  03B6                     l53:	
+   453                           ;newmain.c: 119: case 1:
+   454                           
+   455                           
+   456                           ;newmain.c: 120: GPIObits.GP2 = 1;
+   457  03B6  1505               	bsf	5,2	;volatile
+   458                           
+   459                           ;newmain.c: 121: _delay((unsigned long)((900)*((4000000)/4000000.0)));
+   460  03B7  30E0               	movlw	224
+   461  03B8  00A0               	movwf	??_TRANSMIT_DATA
+   462  03B9                     u317:	
+   463  03B9  0000               	nop
+   464  03BA  0BA0               	decfsz	??_TRANSMIT_DATA,f
+   465  03BB  2BB9               	goto	u317
+   466  03BC  2BBD               	nop2	;nop
+   467  03BD  0000               	nop
+   468                           
+   469                           ;newmain.c: 122: GPIObits.GP2 = 0;
+   470  03BE  1283               	bcf	3,5	;RP0=0, select bank0
+   471  03BF  1105               	bcf	5,2	;volatile
+   472                           
+   473                           ;newmain.c: 123: _delay((unsigned long)((300)*((4000000)/4000000.0)));
+   474  03C0  3063               	movlw	99
+   475  03C1  00A0               	movwf	??_TRANSMIT_DATA
+   476  03C2                     u327:	
+   477  03C2  0BA0               	decfsz	??_TRANSMIT_DATA,f
+   478  03C3  2BC2               	goto	u327
+   479  03C4  2BC5               	nop2	;nop
+   480  03C5                     l700:	
+   481                           ;newmain.c: 125: }
+   482                           
+   483                           ;newmain.c: 124: break;
+   484                           
+   485                           
+   486                           ;newmain.c: 126: CHARBYTE.CHAR <<= 1;
+   487  03C5  3001               	movlw	1
+   488  03C6  1283               	bcf	3,5	;RP0=0, select bank0
+   489  03C7  00A0               	movwf	??_TRANSMIT_DATA
+   490  03C8                     u165:	
+   491  03C8  1003               	clrc
+   492  03C9  0DAC               	rlf	_CHARBYTE,f
+   493  03CA  0DAD               	rlf	_CHARBYTE+1,f
+   494  03CB  0DAE               	rlf	_CHARBYTE+2,f
+   495  03CC  0DAF               	rlf	_CHARBYTE+3,f
+   496  03CD  0BA0               	decfsz	??_TRANSMIT_DATA,f
+   497  03CE  2BC8               	goto	u165
+   498  03CF  3001               	movlw	1
+   499  03D0  07A6               	addwf	TRANSMIT_DATA@x,f
+   500  03D1  1803               	skipnc
+   501  03D2  0AA7               	incf	TRANSMIT_DATA@x+1,f
+   502  03D3  3000               	movlw	0
+   503  03D4  07A7               	addwf	TRANSMIT_DATA@x+1,f
+   504  03D5                     L2:	
+   505  03D5  0827               	movf	TRANSMIT_DATA@x+1,w
+   506  03D6  3A80               	xorlw	128
+   507  03D7  00DF               	movwf	95
+   508  03D8  3080               	movlw	128
+   509  03D9  025F               	subwf	95,w
+   510  03DA  1D03               	skipz
+   511  03DB  2BDE               	goto	u175
+   512  03DC  3019               	movlw	25
+   513  03DD  0226               	subwf	TRANSMIT_DATA@x,w
+   514  03DE                     u175:	
+   515  03DE  1803               	btfsc	3,0
+   516  03DF  2BEB               	goto	l706
+   517  03E0  1283               	bcf	3,5	;RP0=0, select bank0
+   518  03E1  082F               	movf	_CHARBYTE+3,w
+   519  03E2  3901               	andlw	1
+   520                           
+   521                           ; Switch size 1, requested type "space"
+   522                           ; Number of cases is 2, Range of values is 0 to 1
+   523                           ; switch strategies available:
+   524                           ; Name         Instructions Cycles
+   525                           ; simple_byte            7     4 (average)
+   526                           ; direct_byte            8     6 (fixed)
+   527                           ; jumptable            260     6 (fixed)
+   528                           ;	Chosen strategy is simple_byte
+   529  03E3  3A00               	xorlw	0	; case 0
+   530  03E4  1903               	skipnz
+   531  03E5  2BA6               	goto	l51
+   532  03E6  3A01               	xorlw	1	; case 1
+   533  03E7  1903               	skipnz
+   534  03E8  2BB6               	goto	l53
+   535  03E9  2BC5               	goto	l700
+   536  03EA  2BC5               	goto	l700
+   537  03EB                     l706:	
+   538                           
+   539                           ;newmain.c: 127: }
+   540                           ;newmain.c: 128: _delay((unsigned long)((8400)*((4000000)/4000000.0)));
+   541  03EB  300B               	movlw	11
+   542  03EC  1283               	bcf	3,5	;RP0=0, select bank0
+   543  03ED  00A1               	movwf	??_TRANSMIT_DATA+1
+   544  03EE  30E7               	movlw	231
+   545  03EF  00A0               	movwf	??_TRANSMIT_DATA
+   546  03F0                     u337:	
+   547  03F0  0BA0               	decfsz	??_TRANSMIT_DATA,f
+   548  03F1  2BF0               	goto	u337
+   549  03F2  0BA1               	decfsz	??_TRANSMIT_DATA+1,f
+   550  03F3  2BF0               	goto	u337
+   551  03F4  2BF5               	nop2
+   552  03F5  2B97               	goto	l708
+   553  03F6                     l710:	
+   554  03F6  1A85               	btfsc	5,5	;volatile
+   555  03F7  0008               	return
+   556  03F8  2B9A               	goto	l680
+   557  03F9                     __end_of_TRANSMIT_DATA:	
+   558                           ;newmain.c: 129: }
+   559                           ;newmain.c: 131: return 1;
+   560                           ;	Return value of _TRANSMIT_DATA is never used
+   561                           
+   562                           
+   563                           	psect	text2
+   564  0318                     __ptext2:	
+   565 ;; *************** function _PIC_INIT *****************
+   566 ;; Defined at:
+   567 ;;		line 42 in file "newmain.c"
+   568 ;; Parameters:    Size  Location     Type
+   569 ;;		None
+   570 ;; Auto vars:     Size  Location     Type
+   571 ;;		None
+   572 ;; Return value:  Size  Location     Type
+   573 ;;                  1    wreg      void 
+   574 ;; Registers used:
+   575 ;;		wreg, status,2
+   576 ;; Tracked objects:
+   577 ;;		On entry : 0/0
+   578 ;;		On exit  : 0/0
+   579 ;;		Unchanged: 0/0
+   580 ;; Data sizes:     COMMON   BANK0
+   581 ;;      Params:         0       0
+   582 ;;      Locals:         0       0
+   583 ;;      Temps:          0       0
+   584 ;;      Totals:         0       0
+   585 ;;Total ram usage:        0 bytes
+   586 ;; Hardware stack levels used:    1
+   587 ;; This function calls:
+   588 ;;		Nothing
+   589 ;; This function is called by:
+   590 ;;		_main
+   591 ;; This function uses a non-reentrant model
+   592 ;;
+   593                           
+   594                           
+   595                           ;psect for function _PIC_INIT
+   596  0318                     _PIC_INIT:	
+   597                           
+   598                           ;newmain.c: 43: OSCCAL = 0b00100000;
+   599                           
+   600                           ;incstack = 0
+   601                           ; Regs used in _PIC_INIT: [wreg+status,2]
+   602  0318  3020               	movlw	32
+   603  0319  1683               	bsf	3,5	;RP0=1, select bank1
+   604  031A  0090               	movwf	16	;volatile
+   605                           
+   606                           ;newmain.c: 44: GPIO = 0;
+   607  031B  1283               	bcf	3,5	;RP0=0, select bank0
+   608  031C  0185               	clrf	5	;volatile
+   609                           
+   610                           ;newmain.c: 45: TRISIO = 0xff;
+   611  031D  30FF               	movlw	255
+   612  031E  1683               	bsf	3,5	;RP0=1, select bank1
+   613  031F  0085               	movwf	5	;volatile
+   614                           
+   615                           ;newmain.c: 46: ANSEL = 0;
+   616  0320  019F               	clrf	31	;volatile
+   617                           
+   618                           ;newmain.c: 47: ADCON0 = 0;
+   619  0321  1283               	bcf	3,5	;RP0=0, select bank0
+   620  0322  019F               	clrf	31	;volatile
+   621                           
+   622                           ;newmain.c: 48: INTCON = 0;
+   623  0323  018B               	clrf	11	;volatile
+   624                           
+   625                           ;newmain.c: 49: CMCON = 0;
+   626  0324  0199               	clrf	25	;volatile
+   627                           
+   628                           ;newmain.c: 50: OPTION_REGbits.nGPPU = 0;
+   629  0325  1683               	bsf	3,5	;RP0=1, select bank1
+   630  0326  1381               	bcf	1,7	;volatile
+   631                           
+   632                           ;newmain.c: 51: WPUbits.WPU4 = 1;
+   633  0327  1615               	bsf	21,4	;volatile
+   634                           
+   635                           ;newmain.c: 52: WPUbits.WPU5 = 1;
+   636  0328  1695               	bsf	21,5	;volatile
+   637                           
+   638                           ;newmain.c: 53: TRISIObits.TRISIO2 = 0;
+   639  0329  1105               	bcf	5,2	;volatile
+   640                           
+   641                           ;newmain.c: 54: INTCONbits.GIE = 1;
+   642  032A  178B               	bsf	11,7	;volatile
+   643                           
+   644                           ;newmain.c: 55: INTCONbits.GPIE = 1;
+   645  032B  158B               	bsf	11,3	;volatile
+   646                           
+   647                           ;newmain.c: 56: INTCONbits.GPIF = 0;
+   648  032C  100B               	bcf	11,0	;volatile
+   649                           
+   650                           ;newmain.c: 57: IOCbits.IOC4 = 1;
+   651  032D  1616               	bsf	22,4	;volatile
+   652                           
+   653                           ;newmain.c: 58: IOCbits.IOC5 = 1;
+   654  032E  1696               	bsf	22,5	;volatile
+   655  032F  0008               	return
+   656  0330                     __end_of_PIC_INIT:	
+   657                           
+   658                           	psect	text3
+   659  0312                     __ptext3:	
+   660 ;; *************** function _INIT_AFTER_SLEEP *****************
+   661 ;; Defined at:
+   662 ;;		line 61 in file "newmain.c"
+   663 ;; Parameters:    Size  Location     Type
+   664 ;;		None
+   665 ;; Auto vars:     Size  Location     Type
+   666 ;;		None
+   667 ;; Return value:  Size  Location     Type
+   668 ;;                  1    wreg      void 
+   669 ;; Registers used:
+   670 ;;		status,2
+   671 ;; Tracked objects:
+   672 ;;		On entry : 0/0
+   673 ;;		On exit  : 0/0
+   674 ;;		Unchanged: 0/0
+   675 ;; Data sizes:     COMMON   BANK0
+   676 ;;      Params:         0       0
+   677 ;;      Locals:         0       0
+   678 ;;      Temps:          0       0
+   679 ;;      Totals:         0       0
+   680 ;;Total ram usage:        0 bytes
+   681 ;; Hardware stack levels used:    1
+   682 ;; This function calls:
+   683 ;;		Nothing
+   684 ;; This function is called by:
+   685 ;;		_main
+   686 ;; This function uses a non-reentrant model
+   687 ;;
+   688                           
+   689                           
+   690                           ;psect for function _INIT_AFTER_SLEEP
+   691  0312                     _INIT_AFTER_SLEEP:	
+   692                           
+   693                           ;newmain.c: 63: INTCON = 0;
+   694                           
+   695                           ;incstack = 0
+   696                           ; Regs used in _INIT_AFTER_SLEEP: [status,2]
+   697  0312  018B               	clrf	11	;volatile
+   698                           
+   699                           ;newmain.c: 64: GPIO = 0;
+   700  0313  1283               	bcf	3,5	;RP0=0, select bank0
+   701  0314  0185               	clrf	5	;volatile
+   702                           
+   703                           ;newmain.c: 65: INTCONbits.GIE = 1;
+   704  0315  178B               	bsf	11,7	;volatile
+   705                           
+   706                           ;newmain.c: 66: INTCONbits.GPIE = 1;
+   707  0316  158B               	bsf	11,3	;volatile
+   708  0317  0008               	return
+   709  0318                     __end_of_INIT_AFTER_SLEEP:	
+   710  005E                     btemp	set	94	;btemp
+   711  005E                     wtemp	set	94
+   712  005E                     wtemp0	set	94
+   713  0060                     wtemp1	set	96
+   714  0062                     wtemp2	set	98
+   715  0064                     wtemp3	set	100
+   716  0066                     wtemp4	set	102
+   717  0068                     wtemp5	set	104
+   718  005F                     wtemp6	set	95
+   719  005E                     ttemp	set	94
+   720  005E                     ttemp0	set	94
+   721  0061                     ttemp1	set	97
+   722  0064                     ttemp2	set	100
+   723  0067                     ttemp3	set	103
+   724  005F                     ttemp4	set	95
+   725  005E                     ltemp	set	94
+   726  005E                     ltemp0	set	94
+   727  0062                     ltemp1	set	98
+   728  0066                     ltemp2	set	102
+   729  0060                     ltemp3	set	96
+
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        0
+    BSS         4
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMMON            0      0       0
+    BANK0            62     12      16
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMMON
+
+    None.
+
+Critical Paths under _main in BANK0
+
+    _main->_TRANSMIT_DATA
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 4     4      0     142
+                                              8 BANK0      4     4      0
+                   _INIT_AFTER_SLEEP
+                           _PIC_INIT
+                      _TRANSMIT_DATA
+ ---------------------------------------------------------------------------------
+ (1) _TRANSMIT_DATA                                        8     8      0      71
+                                              0 BANK0      8     8      0
+ ---------------------------------------------------------------------------------
+ (1) _PIC_INIT                                             0     0      0       0
+ ---------------------------------------------------------------------------------
+ (1) _INIT_AFTER_SLEEP                                     0     0      0       0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 1
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _INIT_AFTER_SLEEP
+   _PIC_INIT
+   _TRANSMIT_DATA
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BITCOMMON            0      0       0       0        0.0%
+EEDATA              80      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+BITSFR0              0      0       0       1        0.0%
+SFR0                 0      0       0       1        0.0%
+COMMON               0      0       0       1        0.0%
+BITSFR1              0      0       0       2        0.0%
+SFR1                 0      0       0       2        0.0%
+STACK                0      0       0       2        0.0%
+BITBANK0            3E      0       0       3        0.0%
+BANK0               3E      C      10       4       25.8%
+ABS                  0      0      10       5        0.0%
+DATA                 0      0      10       6        0.0%
+
+
+Microchip Technology PIC Macro Assembler V1.36 build -262312587 
+Symbol Table                                                                                   Tue Dec  6 13:42:40 2022
+
+              __CFG_CP$OFF 0000                         l41 0373                         l51 03A6  
+                       l53 03B6                         l57 0331                         l59 033B  
+                      l700 03C5                        l710 03F6                        l706 03EB  
+                      l708 0397                        l734 034B                        l742 035E  
+                      l680 039A                        l728 033F                        l738 0350  
+                      u307 03B0                        u165 03C8                        u317 03B9  
+                      u175 03DE                        u327 03C2                        u337 03F0  
+                      u257 0354               __CFG_CPD$OFF 0000                        u267 0380  
+                      u277 0389                        u287 0392                        u297 03A9  
+                     _GPIO 0005                main@execute 002B                       _main 0330  
+                     btemp 005E                       ltemp 005E                       start 0000  
+                     ttemp 005E                       wtemp 005E                      ?_main 0020  
+            __CFG_WDTE$OFF 0000                      _CMCON 0019                      _ANSEL 009F  
+         __end_of_PIC_INIT 0330             __CFG_BOREN$OFF 0000                      ltemp0 005E  
+                    ltemp1 0062                      ltemp2 0066                      ltemp3 0060  
+                    ttemp0 005E                      ttemp1 0061                      ttemp2 0064  
+                    ttemp3 0067                      ttemp4 005F                      status 0003  
+                    wtemp0 005E                      wtemp1 0060                      wtemp2 0062  
+                    wtemp3 0064                      wtemp4 0066                      wtemp5 0068  
+                    wtemp6 005F             __CFG_MCLRE$OFF 0000            __initialization 03F9  
+             __end_of_main 0360                     ??_main 0028                     _ADCON0 001F  
+            main@but_count 002A                     _INTCON 000B                     _OSCCAL 0090  
+                   _TRISIO 0085             __CFG_PWRTE$OFF 0000  TRANSMIT_DATA@CURRENT_DATA 0022  
+  __end_of__initialization 03FD          ?_INIT_AFTER_SLEEP 0020                  ?_PIC_INIT 0020  
+       ??_INIT_AFTER_SLEEP 0000             __pcstackCOMMON 0000             _OPTION_REGbits 0081  
+    __end_of_TRANSMIT_DATA 03F9                 __pbssBANK0 002C                 ??_PIC_INIT 0000  
+               __pmaintext 0330                    _IOCbits 0096                    _WPUbits 0095  
+                  __ptext1 0360                    __ptext2 0318                    __ptext3 0312  
+     end_of_initialization 03FD          __size_of_PIC_INIT 0018  __size_of_INIT_AFTER_SLEEP 0006  
+      start_initialization 03F9             TRANSMIT_DATA@x 0026                  ___latbits 0000  
+            __pcstackBANK0 0020     __size_of_TRANSMIT_DATA 0099                   _CHARBYTE 002C  
+                 _GPIObits 0005                   _PIC_INIT 0318           _INIT_AFTER_SLEEP 0312  
+            _TRANSMIT_DATA 0360             ?_TRANSMIT_DATA 0020              __size_of_main 0030  
+               _INTCONbits 000B            ??_TRANSMIT_DATA 0020   __end_of_INIT_AFTER_SLEEP 0318  
+        __CFG_FOSC$INTRCIO 0000                 _TRISIObits 0085  
